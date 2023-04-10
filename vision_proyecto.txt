@@ -1,0 +1,14 @@
+Adivinanza de números.
+En este proyecto, realizaras un juego, donde el objetivo es que el usuario adivine un número aleatorio generado por la computadora en un número limitado de intentos. El juego deberá mostrar al usuario si cada intento es más alto o bajo, y al final del juego, deberá mostrar el número de intentos y la cantidad de intentos utilizados.Utilizar un sistema de puntuacionesque serán almacenadas en un archivo el cual será actualizado y leído.
+
+A continuación, se muestra un esquema básico de cómo será el juego:
+
+1.Crear un pequeño menú para ver puntuaciones y jugar un nuevo juego.
+2.Si genera un nuevo juego preguntar al usuario su nombre.
+3.Generar un número aleatorio entre n y m utilizando la biblioteca “System.Random” de haskell. Los números n y m son ingresados por el usuario.
+4.Utilizar alguna formula para calcular el número de intentos máximo (Puedes utilizar un porcentaje de la diferencia de n y m).
+5.Pedir al usuario que ingrese su primer intento.6.Verificar si el número ingresado es igual al número generado. Si es así, mostrar un mensaje de felicitaciones y terminar el juego. Si no, continuar con el siguiente paso.
+7.Comparar el número ingresado con el número generado y mostrar un mensaje indicando si el número es más alto o bajo.
+8.Pedir al usuario que ingrese su siguiente intento y repetir los pasos 3-4 hasta que el número correcto sea adivinado o hasta que se haya alcanzado un número máximo de intentos.
+9.Si el usuario no ha adivinado el número correcto después de un número máximo de intentos, mostrar un mensaje indicando que el juego ha terminado y mostrar el número correcto.
+10.Guardar la puntuación obtenida (Realizar un cálculo con respecto al número de intentos, el máximo y la diferencia del rango).
