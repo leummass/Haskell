@@ -25,7 +25,6 @@ jugar :: IO()
 jugar = do 
     putStr "\nEscriba su nombre de jugador: "
     nombre <- getLine 
-    print nombre
     putStr "Límite inferior para generar el número: "
     input <- getLine 
     let n = read input :: Int

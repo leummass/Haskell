@@ -20,6 +20,11 @@ Propuesta de lo necesario a implementar en Haskell para resolver el problema:
 1. Generación de un número aleatorio
     1.1 La generación del número aleatorio tiene que ser entre dos números, n y m, utilizando la biblioteca System.Random de Haskell, los números n y m los proporcionará el jugador
 
+Implementado de la siguiente forma:
+
+numeroAleatorio :: Int -> Int -> IO Int
+numeroAleatorio n m = randomRIO(n,m)
+
 2. Función que muestre si el número que se recibió en el intento es más alto o más bajo que el aleatorio generado en ese intento 
 
 3. Al final, mostrar el número de intentos utilizado 
@@ -66,11 +71,56 @@ Propuesta de lo necesario a implementar en Haskell para resolver el problema:
                 100 puntos y se reducen en 5 por intento 
         Para m-n<=5
             Máximo de intentos sin adivinar:
-                Si el número estuvo a 1 de diferencia: 20 puntos 
-                Si el número estuvo a 5 o menos de diferencia: 10 puntos 
+                Si el número estuvo a 1 de diferencia: 15 puntos 
+                Si el número estuvo a 3 o menos de diferencia: 5 puntos 
                 Si el número estuvo a una diferencia mayor a 5:
                 0
             Si se adivina:
                 100 puntos y se reducen en 7 por intento 
 
 
+Explicación del proyecto 
+
+Función main:
+La función main (línea 7) es con la que se inicia el programa, aquí se muestran las 3 opciones que tiene el juego, se le solicitará al usuario que escriba un número dependiendo de la función que quiere, 1 para la función jugar, 2 para la función mostrarPuntuaciones y 3 para salirAdivinanza
+
+Función jugar: 
+Esta función es un bloque do, primero se solicita el nombre del jugador y lo guarda en "nombre", posteriormente se solicitan el límite inferior y el límite superior para generar el número aleatorio los cuales son guardados en n y m respectivamente, después se genera el número aleatorio con la función numeroAleatorio y se guarda en "rn" y se convierte a Int en la siguiente línea (línea 35), después se genera la cantidad de intentos en base a la diferencia entre n y m, la variable valores es una lista vacía, esta se utiliza para la función juego recursivo 
+
+Función juegoRecursivo: 
+la función juegoRecursivo recibe 5 valores, un String que es el nombre del jugador, numeroAleatorio que es el número a adivinar, intento que es el número de intento actual, intentolimit que es el limite de intentos y listanum que es donde se van guardando los valores que introduce el jugador, estos se utilizan para calcular la puntuación en caso de que el jugador no acierte 
+
+En esta función lo que se hace primero es mostrar el número de intento, luego se le solicita al jugador que teclee un número el cual es agregado a la listanum, el la línea 48 con case lo que se hace es utilizar la función compare para verificar si el número que introdujo el jugador es igual al aleatorio (EQ), si es menor retorna LT y si es mayor retorna GT.
+
+En el caso de que sea EQ se imprime una línea que dice "Acertaste", otra con la cantidad de intentos que le tomó, con la función calcularPuntuacion se calcula su puntuación, y por último imprime el nombre del jugador y su puntuación, después añade dicha puntuación al archivo de texto con la función anadirPuntuacion
+
+En caso de que se reciba tanto GT o LT, se imprimirá un mensaje que diga si el número es más alto o más bajo que el aleatorio que se trata de adivinar y se repite la función juegoRecursivo mandándole el mismo nombre, el mismo número aleatorio, el intento + 1, el mismo intentolimit y la lista de numeros pero ahora con el número que se intentó
+
+Función mostrarPuntuaciones:
+Esta función solo se encarga de imprimir en pantalla los resultados previamente guardados en un archivo llamando "puntuaciones.txt"
+
+Función salirAdivinanza:
+Función encargada de ejecutar exitSuccess para terminar el programa 
+
+-- Funciones auxiliares 
+
+anadirPuntuacion:
+Función encargada de añadir las puntuaciones al archivo de texto "puntuaciones.txt" 
+
+calcularPuntuacion:
+Esta función se recibe 5 valores y dependiendo del valor booleano que se reciba son las acciones que se tomarán después, se recibe el intento actual, el limite de intentos, el número más cercano, un booleano que indica si acertó el jugador o no y el número aleatorio generado, en el caso de que el booleando sea True, se llama la función calcAcierto y se le manda el número de intento actual y el límite de los mismos, si el valor booleano es False, se llama a la función calcFallo a la cual se le manda el límite de intentos, el número más cercano al aleatorio y el número aleatorio, 
+
+calcAcierto: 
+Se calculan los puntos dependiendo de los intentos límite y los intentos que tomó para adivinar 
+
+calcFallo: 
+Se calculan los puntos dependiendo del límtie de intentos y la diferencia entre el valor más cercano y el aleatorio
+
+numeroAleatorio: 
+Genera un número aleatorio entre dos valores previamente proporcionados
+
+append:
+Añade un número una lista 
+
+numCercano y cercano:
+Buscan el valor más cercano al aleatorio dentro de una lista
